@@ -17,3 +17,4 @@ public class GalleryViewModel extends ViewModel {
         return mText;
     }
 }
+
