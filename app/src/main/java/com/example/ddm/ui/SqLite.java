@@ -93,7 +93,40 @@ public class SqLite extends SQLiteOpenHelper {
 
         db.insert(TABELA_PERSON, null, values_person);
         db.close();
+    }
 
+    void addUser (User user){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values_user = new ContentValues();
+
+        values_user.put(USER_LOGIN, user.getLogin());
+        values_user.put(USER_SENHA, user.getSenha());
+
+        db.insert(TABELA_USER, null, values_user);
+        db.close();
+}
+    void addLocal (Local local){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values_local = new ContentValues();
+
+        values_local.put(LOCAL_PERSONID, local.getPersonid());
+        values_local.put(LOCAL_BAIRRO, local.getBairro());
+        values_local.put(LOCAL_CEP, local.getCep());
+        values_local.put(LOCAL_CIDADE, local.getCidade());
+        values_local.put(LOCAL_DESCRICAO, local.getDescricao());
+        values_local.put(LOCAL_TITULO, local.getTitulo());
+        values_local.put(LOCAL_RUA, local.getRua());
+        values_local.put(LOCAL_UF, local.getUf());
+        values_local.put(LOCAL_COMPLEMENTO, local.getComplemento());
+        values_local.put(LOCAL_LATITUDE, local.getLatitude());
+        values_local.put(LOCAL_LONGITUDE, local.getLongitude());
+
+        db.insert(TABELA_LOCAL, null, values_local);
+        db.close();
     }
 
 }
