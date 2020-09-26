@@ -1,11 +1,8 @@
 package com.example.ddm;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
 
-import com.example.ddm.ui.SqLite;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -20,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    SqLite db = new SqLite(this);
+
+    DataBase bd = new DataBase(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,5 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    //Teste Crud
 
+    //Insert
 }

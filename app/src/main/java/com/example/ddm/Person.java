@@ -1,4 +1,4 @@
-package com.example.ddm.ui;
+package com.example.ddm;
 
 import java.util.Date;
 
