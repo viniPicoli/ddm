@@ -10,5 +10,20 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Adicionar</string>
     <string name="menu_slideshow">Perfil</string>
-    <string name="nome">Nome</string>
+
+
+    <!--Strings Add Local - Willian Riviera-->
+    <string name="localDescricao">Descrição</string>
+    <string name="localRua">Rua</string>
+    <string name="localUf">UF</string>
+    <string name="localBairro">Bairro</string>
+    <string name="localComplemento">Complemento</string>
+    <string name="localCep">CEP</string>
+    <string name="localCidade">Cidade</string>
+    <string name="localNome">Nome</string>
+    <string name="localDados">Informações do Local</string>
+    <string name="localEndereco">Endereço do Local</string>
+    <string name="localNumero">Nº</string>
+    <string name="localBuscarCep">Buscar</string>
+
 </resources>

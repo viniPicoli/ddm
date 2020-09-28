@@ -4,26 +4,188 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:backgroundTint="#FFFFFF"
+    android:backgroundTintMode="src_in"
+    app:layout_constraintCircleRadius="15dp"
     tools:context=".ui.gallery.GalleryFragment">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="374dp"
-        android:layout_height="595dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginBottom="83dp"
+    <ScrollView
+        android:id="@+id/ScroolViewAddLocal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/editText1"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CardViewAddLocal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/nome"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="#6D000000"
+            app:cardCornerRadius="15dp">
 
-    </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:id="@+id/LinearLayoutAddLocal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/TextViewLocalDados"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/localDados"
+                    android:textColor="#000000" />
+
+                <EditText
+                    android:id="@+id/editTextLocalNome"
+                    android:layout_width="333dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="#000000"
+                    android:ems="10"
+                    android:hint="@string/localNome"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColor="#000000"
+                    android:textColorHighlight="#000000"
+                    android:textColorHint="#000000"
+                    android:textColorLink="#000000" />
+
+                <EditText
+                    android:id="@+id/editTextLocalDescricao"
+                    android:layout_width="333dp"
+                    android:layout_height="89dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="#000000"
+                    android:ems="10"
+                    android:gravity="top"
+                    android:hint="@string/localDescricao"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:textColor="#000000"
+                    android:textColorHighlight="#000000"
+                    android:textColorHint="#000000"
+                    android:textColorLink="#000000" />
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/MapsAddLocal"
+                    android:layout_width="333dp"
+                    android:layout_height="148dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp" />
+
+                <TextView
+                    android:id="@+id/textViewLocalAdress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/localEndereco"
+                    android:textColor="#000000" />
+
+                <LinearLayout
+                    android:id="@+id/LinerarLayoutCep"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editTextLocalCep"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/localCep"
+                        android:importantForAutofill="no"
+                        android:inputType="numberSigned" />
+
+                    <Button
+                        android:id="@+id/buttonFindCep"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/localBuscarCep" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/editTextLocalRua"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/localRua"
+                    android:inputType="textPersonName"
+                    android:importantForAutofill="no" />
+
+                <LinearLayout
+                    android:id="@+id/LinearLayoutBairroN"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editTextLocalBairro"
+                        android:layout_width="166dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/localBairro"
+                        android:inputType="textPersonName"
+                        android:importantForAutofill="no" />
+
+                    <EditText
+                        android:id="@+id/editTextLocalNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="@string/localNumero"
+                        android:inputType="number"
+                        android:importantForAutofill="no" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/editTextLocalComplemento"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/localComplemento"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName" />
+
+                <LinearLayout
+                    android:id="@+id/LineraLayoutCidadeUF"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editTextTextPersonName12"
+                        android:layout_width="266dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/localCidade"
+                        android:inputType="textPersonName" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
