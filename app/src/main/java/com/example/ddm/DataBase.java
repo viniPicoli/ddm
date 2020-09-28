@@ -33,12 +33,15 @@ public class DataBase extends SQLiteOpenHelper {
     private static  final String TABELA_LOCAL = "tb_local";
     private static  final String LOCAL_ID = "id";
     private static  final String LOCAL_PERSONID = "personid";
+    private static  final String LOCAL_AVALIACAOPOS = "avaliacaopos";
+    private static  final String LOCAL_AVALIACAONEG = "avaliacaoneg";
     private static  final String LOCAL_DESCRICAO = "descricao";
     private static  final String LOCAL_TITULO = "titulo";
     private static  final String LOCAL_CIDADE = "cidade";
     private static  final String LOCAL_RUA = "rua";
     private static  final String LOCAL_UF = "uf";
     private static  final String LOCAL_BAIRRO = "bairro";
+    private static  final String LOCAL_NUMERO = "numero";
     private static  final String LOCAL_COMPLEMENTO = "complemento";
     private static  final String LOCAL_CEP = "cep";
     private static  final String LOCAL_LATITUDE = "latitude";
@@ -66,9 +69,10 @@ public class DataBase extends SQLiteOpenHelper {
 
         String QUERY_LOCAL = "CREATE TABLE " + TABELA_LOCAL + " ("
                 + LOCAL_ID + "INTEGER PRIMARY KEY, " + LOCAL_PERSONID + " INTEGER, "
+                + LOCAL_AVALIACAOPOS + "INTEGER PRIMARY KEY, " + LOCAL_AVALIACAONEG + " INTEGER, "
                 + LOCAL_DESCRICAO + " TEXT, " + LOCAL_TITULO + " TEXT, "
                 + LOCAL_CIDADE + " TEXT, " + LOCAL_RUA + " TEXT, "
-                + LOCAL_UF + " TEXT, " + LOCAL_BAIRRO + " TEXT, "
+                + LOCAL_UF + " TEXT, " + LOCAL_BAIRRO + " TEXT, " + LOCAL_NUMERO + " TEXT, "
                 + LOCAL_COMPLEMENTO + " TEXT, " + LOCAL_CEP + " TEXT, "
                 + LOCAL_LATITUDE + " TEXT, " + LOCAL_LONGITUDE + " TEXT)";
         db.execSQL(QUERY_LOCAL);
@@ -81,7 +85,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     // crud add
 
-    void addPerson (Person person){
+    public void addPerson (Person person){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -96,7 +100,7 @@ public class DataBase extends SQLiteOpenHelper {
         db.close();
     }
 
-    void addUser (User user){
+    public void addUser (User user){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -108,14 +112,17 @@ public class DataBase extends SQLiteOpenHelper {
         db.insert(TABELA_USER, null, values_user);
         db.close();
 }
-    void addLocal (Local local){
+    public void addLocal (Local local){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values_local = new ContentValues();
 
         values_local.put(LOCAL_PERSONID, local.getPersonid());
+        values_local.put(LOCAL_AVALIACAOPOS, local.getAvaliacaopos());
+        values_local.put(LOCAL_AVALIACAONEG, local.getAvaliacaoneg());
         values_local.put(LOCAL_BAIRRO, local.getBairro());
+        values_local.put(LOCAL_NUMERO, local.getNumero());
         values_local.put(LOCAL_CEP, local.getCep());
         values_local.put(LOCAL_CIDADE, local.getCidade());
         values_local.put(LOCAL_DESCRICAO, local.getDescricao());
@@ -141,7 +148,7 @@ public class DataBase extends SQLiteOpenHelper {
         db.close();
         }
 
-    void apagarLocal(Local local){
+    public void apagarLocal(Local local){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -149,9 +156,10 @@ public class DataBase extends SQLiteOpenHelper {
 
         db.close();
 
+
     }
 
-    void apagarLUser(User user){
+    public void apagarLUser(User user){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -163,7 +171,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     // Crud select
 
-    Person selecionarPerson(int id) {
+    public Person selecionarPerson(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABELA_PERSON, new String[]{PERSON_ID, PERSON_NOME, PERSON_TELEFONE,
@@ -178,7 +186,7 @@ public class DataBase extends SQLiteOpenHelper {
         return person;
     }
 
-    User selecionarUser(int id) {
+    public User selecionarUser(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABELA_USER, new String[]{USER_ID, USER_LOGIN, USER_SENHA},
@@ -193,12 +201,12 @@ public class DataBase extends SQLiteOpenHelper {
         return user;
     }
 
-    Local selecionarLocal(int id) {
+    public Local selecionarLocal(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABELA_LOCAL, new String[]{LOCAL_ID, LOCAL_PERSONID, LOCAL_DESCRICAO,
-                LOCAL_TITULO,LOCAL_CIDADE,LOCAL_RUA,LOCAL_UF,LOCAL_BAIRRO,LOCAL_COMPLEMENTO,LOCAL_CEP,
-                LOCAL_LATITUDE,LOCAL_LONGITUDE},
+        Cursor cursor = db.query(TABELA_LOCAL, new String[]{LOCAL_ID, LOCAL_PERSONID,LOCAL_AVALIACAOPOS,
+                        LOCAL_AVALIACAONEG,LOCAL_DESCRICAO, LOCAL_TITULO,LOCAL_CIDADE,LOCAL_RUA,LOCAL_UF,
+                        LOCAL_BAIRRO,LOCAL_NUMERO,LOCAL_COMPLEMENTO,LOCAL_CEP, LOCAL_LATITUDE,LOCAL_LONGITUDE},
                 USER_ID + " = ?", new String[]{String.valueOf(id)},
                 null, null, null, null);
 
@@ -206,15 +214,15 @@ public class DataBase extends SQLiteOpenHelper {
             cursor.moveToFirst();
         }
         Local local = new Local(Integer.parseInt(cursor.getString(0)),
-                Integer.parseInt(cursor.getString(1)), cursor.getString(2), cursor.getString(3),
-                cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7),
-                cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(11));
+                Integer.parseInt(cursor.getString(1)), Integer.parseInt(cursor.getString(2)),Integer.parseInt(cursor.getString(3)),cursor.getString(4),
+                cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9),
+                cursor.getString(10), cursor.getString(11), cursor.getString(12), cursor.getString(13), cursor.getString(14));
         return local;
     }
 
     //Crud Update
 
-    void updatePerson(Person person) {
+    public void updatePerson(Person person) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values_person = new ContentValues();
@@ -228,7 +236,7 @@ public class DataBase extends SQLiteOpenHelper {
                 new String[]{String.valueOf(person.getId())});
     }
 
-        void updateUser(User user){
+        public void updateUser(User user){
             SQLiteDatabase db = this.getWritableDatabase();
 
             ContentValues values_user = new ContentValues();
@@ -240,13 +248,16 @@ public class DataBase extends SQLiteOpenHelper {
                     new String[] { String.valueOf(user.getId())});
     }
 
-         void updateLocal(Local local){
+         public void updateLocal(Local local){
             SQLiteDatabase db = this.getWritableDatabase();
 
             ContentValues values_local = new ContentValues();
 
              values_local.put(LOCAL_PERSONID, local.getPersonid());
+             values_local.put(LOCAL_AVALIACAOPOS, local.getAvaliacaopos());
+             values_local.put(LOCAL_AVALIACAONEG, local.getAvaliacaoneg());
              values_local.put(LOCAL_BAIRRO, local.getBairro());
+             values_local.put(LOCAL_NUMERO, local.getNumero());
              values_local.put(LOCAL_CEP, local.getCep());
              values_local.put(LOCAL_CIDADE, local.getCidade());
              values_local.put(LOCAL_DESCRICAO, local.getDescricao());

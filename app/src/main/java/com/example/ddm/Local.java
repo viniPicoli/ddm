@@ -4,12 +4,15 @@ public class Local {
 
     int id;
     int personid;
+    int avaliacaopos;
+    int avaliacaoneg;
     String descricao;
     String titulo;
     String cidade;
     String rua;
     String uf;
     String bairro;
+    String numero;
     String complemento;
     String cep;
     String latitude;
@@ -19,29 +22,35 @@ public class Local {
 
     }
 
-    public Local(int _id,int _personid, String _descricao, String _titulo, String _cidade, String _rua, String _uf, String _bairro, String _complemento, String _cep, String _latitude, String _longitude){
+    public Local(int _id,int _personid,int _avaliacaopos, int _avaliacaoneg, String _descricao, String _titulo, String _cidade, String _rua, String _uf, String _bairro,String _numero, String _complemento, String _cep, String _latitude, String _longitude){
     this.id = _id;
     this.personid = _personid;
+    this.avaliacaopos = _avaliacaopos;
+    this.avaliacaoneg = _avaliacaoneg;
     this.descricao = _descricao;
     this.titulo = _titulo;
     this.cidade = _cidade;
     this.rua = _rua;
     this.uf = _uf;
     this.bairro = _bairro;
+    this.numero = _numero;
     this.complemento = _complemento;
     this.cep = _cep;
     this.latitude = _latitude;
     this.longitude = _longitude;
     }
 
-    public Local(int _personid, String _descricao, String _titulo, String _cidade, String _rua, String _uf, String _bairro, String _complemento, String _cep, String _latitude, String _longitude){
+    public Local(int _personid,int _avaliacaopos, int _avaliacaoneg, String _descricao, String _titulo, String _cidade, String _rua, String _uf, String _bairro,String _numero, String _complemento, String _cep, String _latitude, String _longitude){
         this.personid = _personid;
+        this.avaliacaopos = _avaliacaopos;
+        this.avaliacaoneg = _avaliacaoneg;
         this.descricao = _descricao;
         this.titulo = _titulo;
         this.cidade = _cidade;
         this.rua = _rua;
         this.uf = _uf;
         this.bairro = _bairro;
+        this.numero = _numero;
         this.complemento = _complemento;
         this.cep = _cep;
         this.latitude = _latitude;
@@ -132,6 +141,22 @@ public class Local {
         return latitude;
     }
 
+    public int getAvaliacaopos() {
+        return avaliacaopos;
+    }
+
+    public void setAvaliacaopos(int avaliacaopos) {
+        this.avaliacaopos = avaliacaopos;
+    }
+
+    public int getAvaliacaoneg() {
+        return avaliacaoneg;
+    }
+
+    public void setAvaliacaoneg(int avaliacaoneg) {
+        this.avaliacaoneg = avaliacaoneg;
+    }
+
     public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
@@ -142,5 +167,13 @@ public class Local {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 }

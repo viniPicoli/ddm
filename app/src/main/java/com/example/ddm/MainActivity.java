@@ -1,5 +1,4 @@
 package com.example.ddm;
-
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -13,12 +12,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    public DataBase bd = new DataBase(this);
 
-    DataBase bd = new DataBase(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    //Teste Crud
-
-    //Insert
+    /*
+    Teste Crud
+    Insert
+    */
 }
