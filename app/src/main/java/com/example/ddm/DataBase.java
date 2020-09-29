@@ -69,7 +69,7 @@ public class DataBase extends SQLiteOpenHelper {
 
         String QUERY_LOCAL = "CREATE TABLE " + TABELA_LOCAL + " ("
                 + LOCAL_ID + "INTEGER PRIMARY KEY, " + LOCAL_PERSONID + " INTEGER, "
-                + LOCAL_AVALIACAOPOS + "INTEGER PRIMARY KEY, " + LOCAL_AVALIACAONEG + " INTEGER, "
+                + LOCAL_AVALIACAOPOS + "INTEGER, " + LOCAL_AVALIACAONEG + " INTEGER, "
                 + LOCAL_DESCRICAO + " TEXT, " + LOCAL_TITULO + " TEXT, "
                 + LOCAL_CIDADE + " TEXT, " + LOCAL_RUA + " TEXT, "
                 + LOCAL_UF + " TEXT, " + LOCAL_BAIRRO + " TEXT, " + LOCAL_NUMERO + " TEXT, "
@@ -119,8 +119,8 @@ public class DataBase extends SQLiteOpenHelper {
         ContentValues values_local = new ContentValues();
 
         values_local.put(LOCAL_PERSONID, local.getPersonid());
-        values_local.put(LOCAL_AVALIACAOPOS, local.getAvaliacaopos());
-        values_local.put(LOCAL_AVALIACAONEG, local.getAvaliacaoneg());
+        //values_local.put(LOCAL_AVALIACAOPOS, local.getAvaliacaopos());
+        //values_local.put(LOCAL_AVALIACAONEG, local.getAvaliacaoneg());
         values_local.put(LOCAL_BAIRRO, local.getBairro());
         values_local.put(LOCAL_NUMERO, local.getNumero());
         values_local.put(LOCAL_CEP, local.getCep());

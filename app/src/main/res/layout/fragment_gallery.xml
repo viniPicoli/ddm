@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:backgroundTint="#FFFFFF"
     android:backgroundTintMode="src_in"
     app:layout_constraintCircleRadius="15dp"
     tools:context=".ui.gallery.GalleryFragment">
@@ -14,6 +13,7 @@
         android:id="@+id/ScroolViewAddLocal"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,8 +28,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            app:cardBackgroundColor="#6D000000"
-            app:cardCornerRadius="15dp">
+            app:cardCornerRadius="25dp">
 
             <LinearLayout
                 android:id="@+id/LinearLayoutAddLocal"
@@ -103,6 +102,7 @@
                     android:id="@+id/LinerarLayoutCep"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <EditText
@@ -116,7 +116,7 @@
 
                     <Button
                         android:id="@+id/buttonFindCep"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="@string/localBuscarCep" />
@@ -126,10 +126,11 @@
                     android:id="@+id/editTextLocalRua"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:ems="10"
                     android:hint="@string/localRua"
-                    android:inputType="textPersonName"
-                    android:importantForAutofill="no" />
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName" />
 
                 <LinearLayout
                     android:id="@+id/LinearLayoutBairroN"
@@ -141,20 +142,22 @@
                         android:id="@+id/editTextLocalBairro"
                         android:layout_width="166dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:ems="10"
                         android:hint="@string/localBairro"
-                        android:inputType="textPersonName"
-                        android:importantForAutofill="no" />
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName" />
 
                     <EditText
                         android:id="@+id/editTextLocalNumber"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:layout_weight="1"
                         android:ems="10"
                         android:hint="@string/localNumero"
-                        android:inputType="number"
-                        android:importantForAutofill="no" />
+                        android:importantForAutofill="no"
+                        android:inputType="number" />
 
                 </LinearLayout>
 
@@ -162,6 +165,7 @@
                     android:id="@+id/editTextLocalComplemento"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/localComplemento"
@@ -172,15 +176,55 @@
                     android:id="@+id/LineraLayoutCidadeUF"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName12"
-                        android:layout_width="266dp"
+                        android:id="@+id/editTextLocalCidade"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:hint="@string/localCidade"
+                        android:importantForAutofill="no"
                         android:inputType="textPersonName" />
+
+                    <TextView
+                        android:id="@+id/textViewLocalUF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/localUf"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerLocalUf"
+                        android:layout_width="87dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:spinnerMode="dropdown" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LinearLayoutButtons"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/buttonLocalCancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/localBtnCancel" />
+
+                    <Button
+                        android:id="@+id/buttonLocalConfirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/localBtnConfirm" />
                 </LinearLayout>
 
             </LinearLayout>
