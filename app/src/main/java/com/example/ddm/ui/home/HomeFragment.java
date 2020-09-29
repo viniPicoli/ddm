@@ -11,8 +11,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ddm.Local;
+import com.example.ddm.MainActivity;
 import com.example.ddm.R;
+import com.example.ddm.ViewLocal;
 
 public class HomeFragment extends Fragment {
 
@@ -23,13 +28,36 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+//        final TextView textView = root.findViewById(R.id.text_home);
+//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
+
+
         return root;
-    }
+    };
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+
+        RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+
+        Local[] locals = new Local[]{
+//                new Local(null,null, null, "test"),
+                new Local(1,1,1,1,"testkkkk1","test","test","test","test","test","test","test","test","test","test"),
+                new Local(1,1,1,1,"test222","test","test","test","test","test","test","test","test","test","test")
+        };
+
+
+        ViewLocal viewLocal = new ViewLocal(locals);
+        recyclerView.setAdapter(viewLocal);
+    };
+
 }
