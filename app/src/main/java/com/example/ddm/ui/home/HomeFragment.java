@@ -24,7 +24,8 @@ import com.example.ddm.ViewLocal;
 
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class
+HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 

@@ -73,8 +73,4 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-    /*
-    Teste Crud
-    Insert
-    */
 }

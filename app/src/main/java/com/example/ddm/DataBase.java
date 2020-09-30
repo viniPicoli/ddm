@@ -12,7 +12,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     //Variaveis do banco
     private static final int VERSAO_BANCO = 1;
-    private static final String BANCO_NOME = "db_SqLite";
+    private static final String BANCO_NOME = "db_SqL";
 
     //Variaveis table Person
     private static  final String TABELA_PERSON = "tb_person";
@@ -119,8 +119,8 @@ public class DataBase extends SQLiteOpenHelper {
         ContentValues values_local = new ContentValues();
 
         values_local.put(LOCAL_PERSONID, local.getPersonid());
-        //values_local.put(LOCAL_AVALIACAOPOS, local.getAvaliacaopos());
-        //values_local.put(LOCAL_AVALIACAONEG, local.getAvaliacaoneg());
+        values_local.put(LOCAL_AVALIACAOPOS, local.getAvaliacaopos());
+        values_local.put(LOCAL_AVALIACAONEG, local.getAvaliacaoneg());
         values_local.put(LOCAL_BAIRRO, local.getBairro());
         values_local.put(LOCAL_NUMERO, local.getNumero());
         values_local.put(LOCAL_CEP, local.getCep());
