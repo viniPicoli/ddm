@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,10 +16,13 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.ddm.Local;
 import com.example.ddm.MainActivity;
 import com.example.ddm.R;
 import com.example.ddm.ViewLocal;
+
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -48,9 +53,13 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
+//        List<Local> listLocal;
+//        Local local = new Local();
+//        listLocal = local.TodosOsLocal();
+//        ArrayAdapter<Local> adapter = new ArrayAdapter<Local>(this.getContext(), android.R.layout.simple_list_item_1, listLocal );
+//        listLocal.setAdapter(adapter);
 
         Local[] locals = new Local[]{
-//                new Local(null,null, null, "test"),
                 new Local(1,1,1,1,"testkkkk1","test","test","test","test","test","test","test","test","test","test"),
                 new Local(1,1,1,1,"test222","test","test","test","test","test","test","test","test","test","test")
         };
