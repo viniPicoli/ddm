@@ -8,10 +8,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DataBase extends SQLiteOpenHelper {
 
     //Variaveis do banco
-    private static final int VERSAO_BANCO = 1;
+    private static final int VERSAO_BANCO = 2;
     private static final String BANCO_NOME = "db_SqL";
 
     //Variaveis table Person
@@ -80,7 +83,6 @@ public class DataBase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
 
     // crud add
@@ -204,9 +206,9 @@ public class DataBase extends SQLiteOpenHelper {
     public Local selecionarLocal(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABELA_LOCAL, new String[]{LOCAL_ID, LOCAL_PERSONID,LOCAL_AVALIACAOPOS,
-                        LOCAL_AVALIACAONEG,LOCAL_DESCRICAO, LOCAL_TITULO,LOCAL_CIDADE,LOCAL_RUA,LOCAL_UF,
-                        LOCAL_BAIRRO,LOCAL_NUMERO,LOCAL_COMPLEMENTO,LOCAL_CEP, LOCAL_LATITUDE,LOCAL_LONGITUDE},
+        Cursor cursor = db.query(TABELA_LOCAL, new String[]{LOCAL_ID, LOCAL_PERSONID, LOCAL_AVALIACAOPOS,LOCAL_AVALIACAONEG,
+                        LOCAL_DESCRICAO, LOCAL_TITULO,LOCAL_CIDADE,LOCAL_RUA,LOCAL_UF, LOCAL_BAIRRO, LOCAL_NUMERO,
+                        LOCAL_COMPLEMENTO,LOCAL_CEP, LOCAL_LATITUDE,LOCAL_LONGITUDE},
                 USER_ID + " = ?", new String[]{String.valueOf(id)},
                 null, null, null, null);
 
@@ -218,6 +220,40 @@ public class DataBase extends SQLiteOpenHelper {
                 cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9),
                 cursor.getString(10), cursor.getString(11), cursor.getString(12), cursor.getString(13), cursor.getString(14));
         return local;
+    }
+
+    public List<Local> selecttodoslocais(){
+        List<Local> listaLocal = new ArrayList<Local>();
+        String query = "Select * from " + TABELA_LOCAL;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query,null);
+
+        if(cursor.moveToFirst()){
+            do{
+                Local local = new Local();
+                        local.setId(Integer.parseInt(cursor.getString(0)));
+                        local.setPersonid(Integer.parseInt(cursor.getString(1)));
+                        local.setAvaliacaopos(Integer.parseInt(cursor.getString(2)));
+                        local.setAvaliacaoneg(Integer.parseInt(cursor.getString(3)));
+                        local.setDescricao(cursor.getString(4));
+                        local.setTitulo(cursor.getString(5));
+                        local.setCidade(cursor.getString(6));
+                        local.setRua(cursor.getString(7));
+                        local.setUf(cursor.getString(8));
+                        local.setBairro(cursor.getString(9));
+                        local.setNumero(cursor.getString(10));
+                        local.setComplemento(cursor.getString(11));
+                        local.setCep(cursor.getString(12));
+                        local.setLatitude(cursor.getString(13));
+                        local.setLongitude(cursor.getString(14));
+
+                        listaLocal.add(local);
+            }while(cursor.moveToNext());
+        }
+
+        return listaLocal;
     }
 
     //Crud Update
