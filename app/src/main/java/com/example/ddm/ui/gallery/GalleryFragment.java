@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -67,6 +68,7 @@ public class GalleryFragment extends Fragment {
         btnBack.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick (View v) {
+
                 Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
             }
         });
@@ -173,6 +175,8 @@ public class GalleryFragment extends Fragment {
             EditText localComplemento = getActivity().findViewById(R.id.editTextLocalComplemento);
             EditText localCidade = getActivity().findViewById(R.id.editTextLocalCidade);
             Spinner localUF = (Spinner) getActivity().findViewById(R.id.spinnerLocalUf);
+            TextView localLatitude = getActivity().findViewById(R.id.textViewLocalLatitudeValue);
+            TextView localLongitude = getActivity().findViewById(R.id.textViewLocalLongitudeValue);
 
             Local local = new Local();
             DataBase db = new DataBase(getContext());
@@ -189,8 +193,8 @@ public class GalleryFragment extends Fragment {
             local.setComplemento(localComplemento.getText().toString());
             local.setCidade(localCidade.getText().toString());
             local.setUf(localUF.getSelectedItem().toString());
-            local.setLatitude("0");
-            local.setLongitude("0");
+            local.setLatitude(localLatitude.getText().toString());
+            local.setLongitude(localLongitude.getText().toString());
 
             db.addLocal(local);
             Toast.makeText(getContext(), "Salvo com Sucesso!", Toast.LENGTH_SHORT).show();

@@ -27,6 +27,8 @@
     <string name="localBuscarCep">Buscar</string>
     <string name="localBtnCancel">Cancelar</string>
     <string name="localBtnConfirm">Publicar</string>
+    <string name="localLatitude">Latitude</string>
+    <string name="localLongitude">Longitude</string>
     <string-array name="LocalListUFs">
         <item>AC</item>
         <item>AL</item>
