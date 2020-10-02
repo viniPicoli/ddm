@@ -28,7 +28,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            app:cardCornerRadius="25dp">
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:id="@+id/LinearLayoutAddLocal"
@@ -50,7 +50,7 @@
 
                 <EditText
                     android:id="@+id/editTextLocalNome"
-                    android:layout_width="333dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
@@ -66,7 +66,7 @@
 
                 <EditText
                     android:id="@+id/editTextLocalDescricao"
-                    android:layout_width="333dp"
+                    android:layout_width="match_parent"
                     android:layout_height="89dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
@@ -80,15 +80,6 @@
                     android:textColorHighlight="#000000"
                     android:textColorHint="#000000"
                     android:textColorLink="#000000" />
-
-                <com.google.android.gms.maps.MapView
-                    android:id="@+id/MapsAddLocal"
-                    android:layout_width="333dp"
-                    android:layout_height="148dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp" />
 
                 <TextView
                     android:id="@+id/textViewLocalAdress"
@@ -205,6 +196,13 @@
                         android:spinnerMode="dropdown" />
 
                 </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/FrameLocal"
+                    android:layout_width="match_parent"
+                    android:layout_height="216dp">
+
+                </FrameLayout>
 
                 <LinearLayout
                     android:id="@+id/LinearLayoutButtons"
