@@ -235,7 +235,7 @@ public class DataBase extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             do{
                 Local local = new Local();
-                local.setId(Integer.parseInt(cursor.getString(0)));
+//                local.setId(Integer.parseInt(cursor.getString(0)));
                 local.setPersonid(Integer.parseInt(cursor.getString(1)));
                 local.setAvaliacaopos(Integer.parseInt(cursor.getString(2)));
                 local.setAvaliacaoneg(Integer.parseInt(cursor.getString(3)));

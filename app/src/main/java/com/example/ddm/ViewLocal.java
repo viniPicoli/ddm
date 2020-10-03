@@ -20,6 +20,9 @@ public class ViewLocal extends RecyclerView.Adapter<ViewLocal.ViewHolder>{
         this.locals = locals;
 //        this.activity = activity;
     }
+    public ViewLocal() {
+
+    }
 
     @NonNull
     @Override
