@@ -3,6 +3,7 @@ package com.example.ddm;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,6 @@ public class Local {
     String longitude;
 
     private SQLiteDatabase db;
-
     public Local(){
     }
 
@@ -184,33 +184,4 @@ public class Local {
     public void setNumero(String numero) {
         this.numero = numero;
     }
-
-
-//    public List<Local> TodosOsLocal(){
-//        List<Local> lista = new ArrayList<Local>();
-//
-//        Cursor cursor = db.rawQuery("SELECT * FROM local", null);
-//
-//        while (cursor.moveToNext()){
-//            lista.add(new Local(
-//                    cursor.getInt(1),
-//                    cursor.getInt(2),
-//                    cursor.getInt(3),
-//                    cursor.getInt(4),
-//                    cursor.getString(5),
-//                    cursor.getString(6),
-//                    cursor.getString(7),
-//                    cursor.getString(8),
-//                    cursor.getString(9),
-//                    cursor.getString(10),
-//                    cursor.getString(11),
-//                    cursor.getString(12),
-//                    cursor.getString(13),
-//                    cursor.getString(14),
-//                    cursor.getString(15)
-//            ));
-//        }
-//
-//        return lista;
-//    }
 }

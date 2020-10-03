@@ -113,7 +113,7 @@ public class DataBase extends SQLiteOpenHelper {
 
         db.insert(TABELA_USER, null, values_user);
         db.close();
-}
+    }
     public void addLocal (Local local){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -148,7 +148,7 @@ public class DataBase extends SQLiteOpenHelper {
         db.delete(TABELA_PERSON, PERSON_ID + " = ?", new String[] {String.valueOf(person.getId())});
 
         db.close();
-        }
+    }
 
     public void apagarLocal(Local local){
 
@@ -230,28 +230,37 @@ public class DataBase extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query,null);
 
+
+
         if(cursor.moveToFirst()){
             do{
                 Local local = new Local();
-                        local.setId(Integer.parseInt(cursor.getString(0)));
-                        local.setPersonid(Integer.parseInt(cursor.getString(1)));
-                        local.setAvaliacaopos(Integer.parseInt(cursor.getString(2)));
-                        local.setAvaliacaoneg(Integer.parseInt(cursor.getString(3)));
-                        local.setDescricao(cursor.getString(4));
-                        local.setTitulo(cursor.getString(5));
-                        local.setCidade(cursor.getString(6));
-                        local.setRua(cursor.getString(7));
-                        local.setUf(cursor.getString(8));
-                        local.setBairro(cursor.getString(9));
-                        local.setNumero(cursor.getString(10));
-                        local.setComplemento(cursor.getString(11));
-                        local.setCep(cursor.getString(12));
-                        local.setLatitude(cursor.getString(13));
-                        local.setLongitude(cursor.getString(14));
+                local.setId(Integer.parseInt(cursor.getString(0)));
+                local.setPersonid(Integer.parseInt(cursor.getString(1)));
+                local.setAvaliacaopos(Integer.parseInt(cursor.getString(2)));
+                local.setAvaliacaoneg(Integer.parseInt(cursor.getString(3)));
+                local.setDescricao(cursor.getString(4));
+                local.setTitulo(cursor.getString(5));
+                local.setCidade(cursor.getString(6));
+                local.setRua(cursor.getString(7));
+                local.setUf(cursor.getString(8));
+                local.setBairro(cursor.getString(9));
+                local.setNumero(cursor.getString(10));
+                local.setComplemento(cursor.getString(11));
+                local.setCep(cursor.getString(12));
+                local.setLatitude(cursor.getString(13));
+                local.setLongitude(cursor.getString(14));
 
-                        listaLocal.add(local);
+
+                System.out.println("locallocallocallocallocallocallocallocallocallocal");
+                System.out.println(local);
+
+                listaLocal.add(local);
             }while(cursor.moveToNext());
         }
+
+        System.out.println("Seu texto é inserido aqui, entre aspas duplas");
+        System.out.println(listaLocal);
 
         return listaLocal;
     }
@@ -272,39 +281,39 @@ public class DataBase extends SQLiteOpenHelper {
                 new String[]{String.valueOf(person.getId())});
     }
 
-        public void updateUser(User user){
-            SQLiteDatabase db = this.getWritableDatabase();
+    public void updateUser(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
 
-            ContentValues values_user = new ContentValues();
+        ContentValues values_user = new ContentValues();
 
-            values_user.put(USER_LOGIN, user.getLogin());
-            values_user.put(USER_SENHA, user.getSenha());
+        values_user.put(USER_LOGIN, user.getLogin());
+        values_user.put(USER_SENHA, user.getSenha());
 
-            db.update(TABELA_USER,values_user,USER_ID + " = ?",
-                    new String[] { String.valueOf(user.getId())});
+        db.update(TABELA_USER,values_user,USER_ID + " = ?",
+                new String[] { String.valueOf(user.getId())});
     }
 
-         public void updateLocal(Local local){
-            SQLiteDatabase db = this.getWritableDatabase();
+    public void updateLocal(Local local){
+        SQLiteDatabase db = this.getWritableDatabase();
 
-            ContentValues values_local = new ContentValues();
+        ContentValues values_local = new ContentValues();
 
-             values_local.put(LOCAL_PERSONID, local.getPersonid());
-             values_local.put(LOCAL_AVALIACAOPOS, local.getAvaliacaopos());
-             values_local.put(LOCAL_AVALIACAONEG, local.getAvaliacaoneg());
-             values_local.put(LOCAL_BAIRRO, local.getBairro());
-             values_local.put(LOCAL_NUMERO, local.getNumero());
-             values_local.put(LOCAL_CEP, local.getCep());
-             values_local.put(LOCAL_CIDADE, local.getCidade());
-             values_local.put(LOCAL_DESCRICAO, local.getDescricao());
-             values_local.put(LOCAL_TITULO, local.getTitulo());
-             values_local.put(LOCAL_RUA, local.getRua());
-             values_local.put(LOCAL_UF, local.getUf());
-             values_local.put(LOCAL_COMPLEMENTO, local.getComplemento());
-             values_local.put(LOCAL_LATITUDE, local.getLatitude());
-             values_local.put(LOCAL_LONGITUDE, local.getLongitude());
+        values_local.put(LOCAL_PERSONID, local.getPersonid());
+        values_local.put(LOCAL_AVALIACAOPOS, local.getAvaliacaopos());
+        values_local.put(LOCAL_AVALIACAONEG, local.getAvaliacaoneg());
+        values_local.put(LOCAL_BAIRRO, local.getBairro());
+        values_local.put(LOCAL_NUMERO, local.getNumero());
+        values_local.put(LOCAL_CEP, local.getCep());
+        values_local.put(LOCAL_CIDADE, local.getCidade());
+        values_local.put(LOCAL_DESCRICAO, local.getDescricao());
+        values_local.put(LOCAL_TITULO, local.getTitulo());
+        values_local.put(LOCAL_RUA, local.getRua());
+        values_local.put(LOCAL_UF, local.getUf());
+        values_local.put(LOCAL_COMPLEMENTO, local.getComplemento());
+        values_local.put(LOCAL_LATITUDE, local.getLatitude());
+        values_local.put(LOCAL_LONGITUDE, local.getLongitude());
 
-             db.update(TABELA_LOCAL,values_local,LOCAL_ID + " = ?",
-                    new String[] { String.valueOf(local.getId())});
+        db.update(TABELA_LOCAL,values_local,LOCAL_ID + " = ?",
+                new String[] { String.valueOf(local.getId())});
     }
 }

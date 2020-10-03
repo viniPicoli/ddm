@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.ddm.DataBase;
 import com.example.ddm.Local;
 import com.example.ddm.MainActivity;
 import com.example.ddm.R;
@@ -54,11 +55,11 @@ HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-//        List<Local> listLocal;
-//        Local local = new Local();
-//        listLocal = local.TodosOsLocal();
-//        ArrayAdapter<Local> adapter = new ArrayAdapter<Local>(this.getContext(), android.R.layout.simple_list_item_1, listLocal );
-//        listLocal.setAdapter(adapter);
+        List<Local> listLocal;
+        Local local = new Local();
+        DataBase db = new DataBase(getContext());
+        listLocal = db.selecttodoslocais();
+
 
         Local[] locals = new Local[]{
                 new Local(1,1,1,1,"testkkkk1","test","test","test","test","test","test","test","test","test","test"),
