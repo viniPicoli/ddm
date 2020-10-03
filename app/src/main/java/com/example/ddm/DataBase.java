@@ -121,8 +121,8 @@ public class DataBase extends SQLiteOpenHelper {
         ContentValues values_local = new ContentValues();
 
         values_local.put(LOCAL_PERSONID, local.getPersonid());
-        values_local.put(LOCAL_AVALIACAOPOS, local.getAvaliacaopos());
-        values_local.put(LOCAL_AVALIACAONEG, local.getAvaliacaoneg());
+        //values_local.put(LOCAL_AVALIACAOPOS, local.getAvaliacaopos());
+        //values_local.put(LOCAL_AVALIACAONEG, local.getAvaliacaoneg());
         values_local.put(LOCAL_BAIRRO, local.getBairro());
         values_local.put(LOCAL_NUMERO, local.getNumero());
         values_local.put(LOCAL_CEP, local.getCep());
