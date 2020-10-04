@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.ddm.DataBase;
+import com.example.ddm.MaskEditUtil;
 import com.example.ddm.User;
 import com.example.ddm.Person;
 
@@ -38,8 +39,11 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Button btnRegisterUser = (Button) getActivity().findViewById(R.id.buttonRegisterUser);
 
+        EditText registerFone = getActivity().findViewById(R.id.phoneRegister);
+        MaskEditUtil.mask(registerFone, MaskEditUtil.FORMAT_FONE);
+
+        Button btnRegisterUser = (Button) getActivity().findViewById(R.id.buttonRegisterUser);
         btnRegisterUser.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick (View v) {
@@ -48,15 +52,27 @@ public class RegisterFragment extends Fragment {
                     saveData();
                     Toast.makeText(getContext(), "Salvo com sucesso!", Toast.LENGTH_SHORT);
 
-
-//                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                    LoginFragment login = new LoginFragment();
-//                    transaction.addToBackStack(null);
-//                    transaction.replace(R.id.FrameRegister, login);
-//                    transaction.commit();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    LoginFragment login = new LoginFragment();
+                    transaction.addToBackStack(null);
+                    transaction.replace(R.id.FrameRegister, login);
+                    transaction.commit();
                 }
             }
         });
+
+        Button btnLogin = (Button) getActivity().findViewById(R.id.buttonLoginUser);
+        btnLogin.setOnClickListener(new View.OnClickListener()  {
+            @Override
+            public void onClick (View v) {
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    LoginFragment login = new LoginFragment();
+                    transaction.addToBackStack(null);
+                    transaction.replace(R.id.FrameRegister, login);
+                    transaction.commit();
+            }
+        });
+
     }
 
     private Boolean validateInputs(){

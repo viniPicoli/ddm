@@ -27,10 +27,10 @@ public class InitalFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-//        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//        RegisterFragment register = new RegisterFragment();
-//        transaction.replace(R.id.FrameRegister, register);
-//        transaction.commit();
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        LoginFragment login = new LoginFragment();
+        transaction.replace(R.id.FrameRegister, login);
+        transaction.commit();
 
     }
 
