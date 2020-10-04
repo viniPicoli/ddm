@@ -1,7 +1,5 @@
 package com.example.ddm.ui.login;
 
-import com.example.ddm.ui.newRegister.register;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,12 +14,12 @@ import android.widget.Button;
 
 import com.example.ddm.R;
 
-public class login extends Fragment {
+public class LoginFragment extends Fragment {
 
     private LoginViewModel mViewModel;
 
-    public static login newInstance() {
-        return new login();
+    public static LoginFragment newInstance() {
+        return new LoginFragment();
     }
 
     @Override
@@ -44,7 +42,7 @@ public class login extends Fragment {
     }
 
     private void registerNewUser() {
-        //startActivity(new Intent(login.this, register.class));
+        //startActivity(new Intent(LoginFragment.this, RegisterFragment.class));
     }
 
 }

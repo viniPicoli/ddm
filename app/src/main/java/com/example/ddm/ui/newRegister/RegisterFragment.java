@@ -1,7 +1,10 @@
 package com.example.ddm.ui.newRegister;
 
-import androidx.lifecycle.ViewModelProviders;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,26 +16,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.example.ddm.DataBase;
 import com.example.ddm.User;
 import com.example.ddm.Person;
 
 import com.example.ddm.R;
+import com.example.ddm.ui.login.LoginFragment;
 
-public class register extends Fragment {
+public class RegisterFragment extends Fragment {
 
-    private RegisterViewModel mViewModel;
 
-    public static register newInstance() {
-        return new register();
-    }
+    public static RegisterFragment newInstance() { return new RegisterFragment(); }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.register_fragment, container, false);
     }
 
@@ -48,6 +47,13 @@ public class register extends Fragment {
                 if(validateInputs()){
                     saveData();
                     Toast.makeText(getContext(), "Salvo com sucesso!", Toast.LENGTH_SHORT);
+
+
+//                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                    LoginFragment login = new LoginFragment();
+//                    transaction.addToBackStack(null);
+//                    transaction.replace(R.id.FrameRegister, login);
+//                    transaction.commit();
                 }
             }
         });
@@ -61,7 +67,7 @@ public class register extends Fragment {
         EditText registerPassword = getActivity().findViewById(R.id.passwordRegister);
         int flag = 1;
         if(registerName.getText().toString().equals("")){
-            registerName.setError("Favor informar o Primeiro Nomer!");
+            registerName.setError("Favor informar o Primeiro Nome!");
             flag = 0;
         }
         if(registerSecondName.getText().toString().equals("")){
@@ -93,6 +99,7 @@ public class register extends Fragment {
             EditText registerPhone = getActivity().findViewById(R.id.phoneRegister);
             EditText registerEmail = getActivity().findViewById(R.id.emailRegister);
             EditText registerPassword = getActivity().findViewById(R.id.passwordRegister);
+            long idUser, idPerson;
 
             User user = new User();
             Person person = new Person();
@@ -100,15 +107,20 @@ public class register extends Fragment {
 
             user.setLogin(registerEmail.getText().toString());
             user.setSenha(registerPassword.getText().toString());
+            idUser = db.addUser(user);
 
             person.setNome(registerName.getText().toString());
             person.setSobrenome(registerSecondName.getText().toString());
             person.setTelefone(registerPhone.getText().toString());
             person.setEmail(registerEmail.getText().toString());
 
+            idPerson = db.addPerson(person);
 
-            db.addUser(user);
-            db.addPerson(person);
+            SharedPreferences sharedPref = getActivity().getPreferences(getContext().MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putLong("IdPerson", idPerson);
+            editor.apply();
+
             Toast.makeText(getContext(), "Salvo com Sucesso!", Toast.LENGTH_SHORT).show();
         } catch (Exception e){
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();

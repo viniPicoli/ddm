@@ -87,7 +87,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     // crud add
 
-    public void addPerson (Person person){
+    public long addPerson (Person person){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -98,11 +98,13 @@ public class DataBase extends SQLiteOpenHelper {
         values_person.put(PERSON_EMAIL, person.getEmail());
         values_person.put(PERSON_TELEFONE, person.getTelefone());
 
-        db.insert(TABELA_PERSON, null, values_person);
+        long id = db.insert(TABELA_PERSON, null, values_person);
         db.close();
+
+        return id;
     }
 
-    public void addUser (User user){
+    public Long addUser (User user){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -111,8 +113,10 @@ public class DataBase extends SQLiteOpenHelper {
         values_user.put(USER_LOGIN, user.getLogin());
         values_user.put(USER_SENHA, user.getSenha());
 
-        db.insert(TABELA_USER, null, values_user);
+        Long id = db.insert(TABELA_USER, null, values_user);
         db.close();
+
+        return id;
     }
     public void addLocal (Local local){
 

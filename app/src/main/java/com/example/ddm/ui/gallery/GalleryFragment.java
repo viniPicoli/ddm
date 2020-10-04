@@ -1,5 +1,6 @@
 package com.example.ddm.ui.gallery;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -181,7 +182,10 @@ public class GalleryFragment extends Fragment {
             Local local = new Local();
             DataBase db = new DataBase(getContext());
 
-            local.setPersonid(1);
+            SharedPreferences sharedPref = getActivity().getPreferences(getContext().MODE_PRIVATE);
+            long idPerson = sharedPref.getLong("IdPerson", 1);
+
+            local.setPersonid(Integer.parseInt(Long.toString(idPerson)));
             //local.setAvaliacaoneg(0);
             //local.setAvaliacaopos(0);
             local.setTitulo(localNome.getText().toString());
