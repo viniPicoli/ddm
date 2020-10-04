@@ -7,6 +7,17 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Configuração</string>
 
+    <string name="login_register">Cadastre-se</string>
+    <string name="Login">Login</string>
+
+    <string name="registerFirstName">Primeiro Nome</string>
+    <string name="registerSecondName">Segundo Nome</string>
+    <string name="registerPhone">Telefone</string>
+    <string name="registerEmail">E-mail</string>
+    <string name="registerPassword">Senha</string>
+    <string name="registerButton">Registrar-se</string>
+    <string name="registerCancel">Calcelar</string>
+
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Adicionar</string>
     <string name="menu_slideshow">Perfil</string>
