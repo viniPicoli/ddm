@@ -60,14 +60,22 @@ HomeFragment extends Fragment {
         DataBase db = new DataBase(getContext());
         listLocal = db.selecttodoslocais();
 
-        System.out.println("Seu texto é inserido aqui, entre aspas duplas");
         System.out.println(listLocal);
 
         ArrayAdapter<Local> adapter = new ArrayAdapter<Local>(this.getContext(), android.R.layout.simple_dropdown_item_1line, listLocal);
 
 
         Local[] locals = new Local[]{
+                new Local(1,1,1,1, "açude com pintado, pirara, aaaa aaa aaaaaaa","Pesca esportiva","test","test","test","test","test","test","test","test","test"),
+                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
+                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
+                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
+                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
+                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
+                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
+                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
                 new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test")
+
         };
 
         ViewLocal viewLocal = new ViewLocal(locals);
