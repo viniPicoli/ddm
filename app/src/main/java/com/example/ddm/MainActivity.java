@@ -29,21 +29,6 @@ public class MainActivity extends AppCompatActivity  {
         setSupportActionBar(toolbar);
 
 
-//        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
-//        Local[] locals = new Local[]{
-////                new Local(null,null, null, "test"),
-//                new Local(1,1,1,1,"test11","test","test","test","test","test","test","test","test","test","test"),
-//                new Local(1,1,1,1,"test222","test","test","test","test","test","test","test","test","test","test")
-//
-//        };
-//
-//        ViewLocal viewLocal = new ViewLocal(locals, MainActivity.this);
-//        recyclerView.setAdapter(viewLocal);
-//
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

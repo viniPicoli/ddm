@@ -236,31 +236,24 @@ public class DataBase extends SQLiteOpenHelper {
             do{
                 Local local = new Local();
 //                local.setId(Integer.parseInt(cursor.getString(0)));
-                local.setPersonid(Integer.parseInt(cursor.getString(1)));
-                local.setAvaliacaopos(Integer.parseInt(cursor.getString(2)));
-                local.setAvaliacaoneg(Integer.parseInt(cursor.getString(3)));
+//                local.setPersonid(Integer.parseInt(cursor.getString(1)));
+//                local.setAvaliacaopos(Integer.parseInt(cursor.getString(2)));
+//                local.setAvaliacaoneg(Integer.parseInt(cursor.getString(3)));
                 local.setDescricao(cursor.getString(4));
                 local.setTitulo(cursor.getString(5));
-                local.setCidade(cursor.getString(6));
-                local.setRua(cursor.getString(7));
-                local.setUf(cursor.getString(8));
-                local.setBairro(cursor.getString(9));
-                local.setNumero(cursor.getString(10));
-                local.setComplemento(cursor.getString(11));
-                local.setCep(cursor.getString(12));
-                local.setLatitude(cursor.getString(13));
-                local.setLongitude(cursor.getString(14));
-
-
-                System.out.println("locallocallocallocallocallocallocallocallocallocal");
-                System.out.println(local);
+//                local.setCidade(cursor.getString(6));
+//                local.setRua(cursor.getString(7));
+//                local.setUf(cursor.getString(8));
+//                local.setBairro(cursor.getString(9));
+//                local.setNumero(cursor.getString(10));
+//                local.setComplemento(cursor.getString(11));
+//                local.setCep(cursor.getString(12));
+//                local.setLatitude(cursor.getString(13));
+//                local.setLongitude(cursor.getString(14));
 
                 listaLocal.add(local);
             }while(cursor.moveToNext());
         }
-
-        System.out.println("Seu texto é inserido aqui, entre aspas duplas");
-        System.out.println(listaLocal);
 
         return listaLocal;
     }

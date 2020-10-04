@@ -37,7 +37,8 @@ public class ViewLocal extends RecyclerView.Adapter<ViewLocal.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Local localList = locals[position];
-        holder.textViewName.setText(localList.getDescricao());
+        holder.textViewName.setText(localList.getTitulo());
+        holder.textDescription.setText(localList.getDescricao());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,11 +56,12 @@ public class ViewLocal extends RecyclerView.Adapter<ViewLocal.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView textViewName;
-
+        TextView textDescription;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.textName);
+            textDescription = itemView.findViewById(R.id.textDescription);
         }
     }
 }
