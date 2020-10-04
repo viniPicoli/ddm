@@ -1,7 +1,7 @@
 package com.example.ddm.ui.login;
 
-import androidx.lifecycle.ViewModelProviders;
-
+import com.example.ddm.ui.newRegister.register;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
 
 import com.example.ddm.R;
 
@@ -31,8 +33,18 @@ public class login extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
-        // TODO: Use the ViewModel
+
+        Button btnRegister = (Button) getActivity().findViewById(R.id.register);
+        btnRegister.setOnClickListener(new View.OnClickListener()  {
+            @Override
+            public void onClick (View v) {
+                registerNewUser();
+            }
+        });
+    }
+
+    private void registerNewUser() {
+        //startActivity(new Intent(login.this, register.class));
     }
 
 }
