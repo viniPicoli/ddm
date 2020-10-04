@@ -1,5 +1,6 @@
 package com.example.ddm.ui.login;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,10 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
+import com.example.ddm.DataBase;
+import com.example.ddm.User;
 import com.example.ddm.R;
 import com.example.ddm.ui.newRegister.RegisterFragment;
+import com.example.ddm.ui.home.HomeFragment;
 
 public class LoginFragment extends Fragment {
 
@@ -52,15 +58,13 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick (View v) {
+                //login();
 
-                //validate login
-
-
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                RegisterFragment register = new RegisterFragment();
-//                transaction.addToBackStack(null);
-//                transaction.replace(R.id.FrameRegister, register);
-//                transaction.commit();
+              FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+              RegisterFragment register = new RegisterFragment();
+              transaction.addToBackStack(null);
+              transaction.replace(R.id.FrameRegister, register);
+              transaction.commit();
 
             }
         });
@@ -68,5 +72,19 @@ public class LoginFragment extends Fragment {
     }
 
 
+    private void login(){
+        try {
+            EditText loginEmail = getActivity().findViewById(R.id.emailLogin);
+            EditText loginPassword = getActivity().findViewById(R.id.passwordLogin);
 
+            DataBase db = new DataBase(getContext());
+
+//            db.getUser(loginEmail.getText().toString(), loginPassword.getText().toString());
+            db.getUser(loginEmail.getText().toString(), loginPassword.getText().toString());
+
+            Toast.makeText(getContext(), "Salvo com Sucesso!", Toast.LENGTH_SHORT).show();
+        } catch (Exception e){
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
 }

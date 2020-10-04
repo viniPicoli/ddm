@@ -61,18 +61,6 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-        Button btnLogin = (Button) getActivity().findViewById(R.id.buttonLoginUser);
-        btnLogin.setOnClickListener(new View.OnClickListener()  {
-            @Override
-            public void onClick (View v) {
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    LoginFragment login = new LoginFragment();
-                    transaction.addToBackStack(null);
-                    transaction.replace(R.id.FrameRegister, login);
-                    transaction.commit();
-            }
-        });
-
     }
 
     private Boolean validateInputs(){
