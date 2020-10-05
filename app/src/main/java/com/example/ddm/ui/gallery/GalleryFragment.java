@@ -1,6 +1,9 @@
 package com.example.ddm.ui.gallery;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +55,14 @@ public class GalleryFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.LocalListUFs, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         localUF.setAdapter(adapter);
+
+        Button btnAddImg = getActivity().findViewById(R.id.imageButtonLocalAddImg);
+        btnAddImg.setOnClickListener(new View.OnClickListener()  {
+            @Override
+            public void onClick (View v) {
+                //saveImg();
+            }
+        });
 
         Button btnLocalCreate = (Button) getActivity().findViewById(R.id.buttonLocalConfirm);
         btnLocalCreate.setOnClickListener(new View.OnClickListener()  {
@@ -207,5 +218,19 @@ public class GalleryFragment extends Fragment {
         }
 
     }
+
+    private void saveImg(){
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(Intent.createChooser(intent, "Selecione uma imagem"), 123);
+    }
+//    private void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if(resultCode == Activity.RESULT_OK){
+//            if(requestCode == 123){
+//                Uri imagemSelecionada = data.getData();
+//
+//            }
+//        }
+//    }
+
 
 }

@@ -5,6 +5,7 @@ public class User {
     int id;
     String login;
     String senha;
+    int personId;
 
     public User (){
 
@@ -43,5 +44,13 @@ public class User {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public int getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 }

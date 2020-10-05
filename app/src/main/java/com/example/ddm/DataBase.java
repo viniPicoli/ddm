@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class DataBase extends SQLiteOpenHelper {
 
     //Variaveis do banco
-    private static final int VERSAO_BANCO = 2;
+    private static final int VERSAO_BANCO = 4;
     private static final String BANCO_NOME = "db_SqL";
 
     //Variaveis table Person
@@ -29,6 +30,7 @@ public class DataBase extends SQLiteOpenHelper {
     //Variaveis table User
     private static  final String TABELA_USER = "tb_user";
     private static  final String USER_ID = "id";
+    private static  final String PERSON_USER_ID  = "idPerson";
     private static  final String USER_LOGIN = "login";
     private static  final String USER_SENHA = "senha";
 
@@ -49,6 +51,7 @@ public class DataBase extends SQLiteOpenHelper {
     private static  final String LOCAL_CEP = "cep";
     private static  final String LOCAL_LATITUDE = "latitude";
     private static  final String LOCAL_LONGITUDE = "longitude";
+    private static  final String PATH = "path";
 
     public DataBase(@Nullable Context context) {
         super(context, BANCO_NOME, null, VERSAO_BANCO);
@@ -66,7 +69,8 @@ public class DataBase extends SQLiteOpenHelper {
 
         String QUERY_USER = "CREATE TABLE " + TABELA_USER + " ("
                 + USER_ID + " INTEGER PRIMARY KEY, " + USER_LOGIN + " TEXT, "
-                + USER_SENHA + " TEXT)";
+                + USER_SENHA + " TEXT, "
+                + PERSON_USER_ID + " INTEGER)";
 
         db.execSQL(QUERY_USER);
 
@@ -77,12 +81,15 @@ public class DataBase extends SQLiteOpenHelper {
                 + LOCAL_CIDADE + " TEXT, " + LOCAL_RUA + " TEXT, "
                 + LOCAL_UF + " TEXT, " + LOCAL_BAIRRO + " TEXT, " + LOCAL_NUMERO + " TEXT, "
                 + LOCAL_COMPLEMENTO + " TEXT, " + LOCAL_CEP + " TEXT, "
-                + LOCAL_LATITUDE + " TEXT, " + LOCAL_LONGITUDE + " TEXT)";
+                + LOCAL_LATITUDE + " TEXT, " + LOCAL_LONGITUDE + " TEXT, "
+                + PATH + " TEXT)";
         db.execSQL(QUERY_LOCAL);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("ALTER TABLE " + TABELA_USER + " ADD COLUMN " + PERSON_USER_ID + " INTEGER");
+        db.execSQL("ALTER TABLE " + TABELA_PERSON + " ADD COLUMN " + PATH + " TEXT");
     }
 
     // crud add
@@ -104,7 +111,7 @@ public class DataBase extends SQLiteOpenHelper {
         return id;
     }
 
-    public Long addUser (User user){
+    public void addUser (User user){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -112,11 +119,11 @@ public class DataBase extends SQLiteOpenHelper {
 
         values_user.put(USER_LOGIN, user.getLogin());
         values_user.put(USER_SENHA, user.getSenha());
+        values_user.put(PERSON_USER_ID, user.getPersonId());
 
-        Long id = db.insert(TABELA_USER, null, values_user);
+        db.insert(TABELA_USER, null, values_user);
         db.close();
 
-        return id;
     }
     public void addLocal (Local local){
 
@@ -207,19 +214,22 @@ public class DataBase extends SQLiteOpenHelper {
         return user;
     }
 
-    public boolean getUser(User user) {
+    public Long getUser(User user) {
 
-
-        String query = "Select * from " + TABELA_USER;
-                //+ " Where login = ? AND senha = ?";
-        String[] selectionArgs = new String[] {user.getLogin(), user.getSenha()};
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
 
-        if (cursor.moveToFirst()) {
-            return false;
+        Cursor cursor = db.query(TABELA_USER, new String[]{PERSON_USER_ID, USER_LOGIN, USER_SENHA},
+                USER_LOGIN + " = ? AND " + USER_SENHA + " = ?", new String[]{String.valueOf(user.getLogin()), String.valueOf(user.getSenha())},
+                null, null, null, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        if (cursor.getCount() > 0) {
+            return Long.parseLong(Integer.toString(cursor.getInt(0)));
         }else{
-            return true;
+            return null;
         }
 
     }

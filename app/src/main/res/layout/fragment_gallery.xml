@@ -73,6 +73,13 @@
                     android:importantForAutofill="no"
                     android:inputType="textMultiLine" />
 
+                <ImageButton
+                    android:id="@+id/imageButtonLocalAddImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/localAddImg"
+                    android:src="@drawable/ic_menu_camera" />
+
                 <TextView
                     android:id="@+id/textViewLocalAdress"
                     android:layout_width="match_parent"

@@ -42,6 +42,7 @@
     <string name="localBtnConfirm">Publicar</string>
     <string name="localLatitude">Latitude</string>
     <string name="localLongitude">Longitude</string>
+    <string name="localAddImg">Adicionar Imagem</string>
     <string-array name="LocalListUFs">
         <item>AC</item>
         <item>AL</item>

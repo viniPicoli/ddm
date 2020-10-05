@@ -54,7 +54,6 @@ public class RegisterFragment extends Fragment {
 
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     LoginFragment login = new LoginFragment();
-                    transaction.addToBackStack(null);
                     transaction.replace(R.id.FrameRegister, login);
                     transaction.commit();
                 }
@@ -109,10 +108,6 @@ public class RegisterFragment extends Fragment {
             Person person = new Person();
             DataBase db = new DataBase(getContext());
 
-            user.setLogin(registerEmail.getText().toString());
-            user.setSenha(registerPassword.getText().toString());
-            idUser = db.addUser(user);
-
             person.setNome(registerName.getText().toString());
             person.setSobrenome(registerSecondName.getText().toString());
             person.setTelefone(registerPhone.getText().toString());
@@ -120,10 +115,10 @@ public class RegisterFragment extends Fragment {
 
             idPerson = db.addPerson(person);
 
-            SharedPreferences sharedPref = getActivity().getPreferences(getContext().MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putLong("IdPerson", idPerson);
-            editor.apply();
+            user.setPersonId(Integer.parseInt(Long.toString(idPerson)));
+            user.setLogin(registerEmail.getText().toString());
+            user.setSenha(registerPassword.getText().toString());
+            db.addUser(user);
 
             Toast.makeText(getContext(), "Salvo com Sucesso!", Toast.LENGTH_SHORT).show();
         } catch (Exception e){
