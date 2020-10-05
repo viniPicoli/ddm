@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.content.Intent;
 
 
 import com.example.ddm.DataBase;
@@ -58,14 +59,12 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick (View v) {
-                //login();
-
-              FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-              RegisterFragment register = new RegisterFragment();
-              transaction.addToBackStack(null);
-              transaction.replace(R.id.FrameRegister, register);
-              transaction.commit();
-
+                login();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                HomeFragment home = new HomeFragment();
+                transaction.addToBackStack(null);
+                transaction.replace(R.id.FrameRegister, home);
+                transaction.commit();
             }
         });
 
@@ -76,13 +75,14 @@ public class LoginFragment extends Fragment {
         try {
             EditText loginEmail = getActivity().findViewById(R.id.emailLogin);
             EditText loginPassword = getActivity().findViewById(R.id.passwordLogin);
-
+            User user = new User();
             DataBase db = new DataBase(getContext());
-
-//            db.getUser(loginEmail.getText().toString(), loginPassword.getText().toString());
-            db.getUser(loginEmail.getText().toString(), loginPassword.getText().toString());
-
-            Toast.makeText(getContext(), "Salvo com Sucesso!", Toast.LENGTH_SHORT).show();
+            boolean test = db.getUser(loginEmail.getText().toString());
+            if(test){
+                Toast.makeText(getContext(), "Salvo com Sucesso!", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getContext(), "Salvo com sem!", Toast.LENGTH_SHORT).show();
+            }
         } catch (Exception e){
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }

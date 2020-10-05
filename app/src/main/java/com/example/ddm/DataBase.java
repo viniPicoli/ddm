@@ -207,19 +207,19 @@ public class DataBase extends SQLiteOpenHelper {
         return user;
     }
 
-    public User getUser(String login, String password) {
+    public boolean getUser(String login) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABELA_USER, new String[]{USER_ID, USER_LOGIN, USER_SENHA},
-                USER_LOGIN + " = ? " + USER_SENHA + " = ? ", new String[]{String.valueOf(login), String.valueOf(password)},
+                USER_LOGIN + " = ? ", new String[]{String.valueOf(login)},
                 null, null, null, null);
 
-        if (cursor != null) {
-            cursor.moveToFirst();
+        if (cursor == null) {
+            return false;
+        }else{
+            return true;
         }
-        User user = new User(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2));
-        return user;
+
     }
 
     public Local selecionarLocal(int id) {
