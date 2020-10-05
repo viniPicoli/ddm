@@ -23,17 +23,20 @@ import com.example.ddm.MainActivity;
 import com.example.ddm.R;
 import com.example.ddm.ViewLocal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class
 HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    private List<Local> localFiltrado = new ArrayList<>();
+    RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
+
+        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 //        final TextView textView = root.findViewById(R.id.text_home);
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -60,25 +63,19 @@ HomeFragment extends Fragment {
         DataBase db = new DataBase(getContext());
         listLocal = db.selecttodoslocais();
 
-        System.out.println(listLocal);
+//        Local[] locals = new Local[]{
+//                new Local(1,1,1,1, "açude com pintado, pirara, aaaa aaa aaaaaaa","Pesca esportiva","test","test","test","test","test","test","test","test","test"),
+//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
+//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
+//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
+//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
+//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
+//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
+//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
+//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test")
+//        };
 
-        ArrayAdapter<Local> adapter = new ArrayAdapter<Local>(this.getContext(), android.R.layout.simple_dropdown_item_1line, listLocal);
-
-
-        Local[] locals = new Local[]{
-                new Local(1,1,1,1, "açude com pintado, pirara, aaaa aaa aaaaaaa","Pesca esportiva","test","test","test","test","test","test","test","test","test"),
-                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
-                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
-                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
-                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
-                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
-                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
-                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
-                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test")
-
-        };
-
-        ViewLocal viewLocal = new ViewLocal(locals);
+        ViewLocal viewLocal = new ViewLocal(this.getContext(), listLocal);
         recyclerView.setAdapter(viewLocal);
     };
 

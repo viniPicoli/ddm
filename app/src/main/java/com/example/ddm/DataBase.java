@@ -242,7 +242,7 @@ public class DataBase extends SQLiteOpenHelper {
     }
 
     public List<Local> selecttodoslocais(){
-        List<Local> listaLocal = new ArrayList<Local>();
+        ArrayList<Local> listaLocal = new ArrayList<Local>();
         String query = "Select * from " + TABELA_LOCAL;
 
         SQLiteDatabase db = this.getWritableDatabase();
