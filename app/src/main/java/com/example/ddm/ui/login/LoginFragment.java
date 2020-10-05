@@ -76,8 +76,11 @@ public class LoginFragment extends Fragment {
             EditText loginEmail = getActivity().findViewById(R.id.emailLogin);
             EditText loginPassword = getActivity().findViewById(R.id.passwordLogin);
             User user = new User();
+            user.setLogin(loginEmail.getText().toString());
+            user.setSenha(loginPassword.getText().toString());
+
             DataBase db = new DataBase(getContext());
-            boolean test = db.getUser(loginEmail.getText().toString());
+            boolean test = db.getUser(user);
             if(test){
                 Toast.makeText(getContext(), "Salvo com Sucesso!", Toast.LENGTH_SHORT).show();
             }else{

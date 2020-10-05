@@ -207,11 +207,11 @@ public class DataBase extends SQLiteOpenHelper {
         return user;
     }
 
-    public boolean getUser(String login) {
+    public boolean getUser(User user) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABELA_USER, new String[]{USER_ID, USER_LOGIN, USER_SENHA},
-                USER_LOGIN + " = ? ", new String[]{String.valueOf(login)},
+                USER_LOGIN + " = " + user.getLogin() + " AND " + USER_SENHA + " = " + user.getSenha(), null,
                 null, null, null, null);
 
         if (cursor == null) {
