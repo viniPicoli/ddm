@@ -208,13 +208,15 @@ public class DataBase extends SQLiteOpenHelper {
     }
 
     public boolean getUser(User user) {
+
+
+        String query = "Select * from " + TABELA_USER;
+                //+ " Where login = ? AND senha = ?";
+        String[] selectionArgs = new String[] {user.getLogin(), user.getSenha()};
         SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
 
-        Cursor cursor = db.query(TABELA_USER, new String[]{USER_ID, USER_LOGIN, USER_SENHA},
-                USER_LOGIN + " = " + user.getLogin() + " AND " + USER_SENHA + " = " + user.getSenha(), null,
-                null, null, null, null);
-
-        if (cursor == null) {
+        if (cursor.moveToFirst()) {
             return false;
         }else{
             return true;
