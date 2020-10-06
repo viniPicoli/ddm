@@ -73,12 +73,31 @@
                     android:importantForAutofill="no"
                     android:inputType="textMultiLine" />
 
-                <ImageButton
-                    android:id="@+id/imageButtonLocalAddImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/localAddImg"
-                    android:src="@drawable/ic_menu_camera" />
+                <LinearLayout
+                    android:id="@+id/LinerarLayoutImgs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/imageButtonLocalAddImg"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:contentDescription="@string/localAddImg"
+                        android:src="@drawable/ic_menu_camera" />
+
+                    <ImageView
+                        android:id="@+id/imageViewLocal"
+                        android:layout_width="190dp"
+                        android:layout_height="43dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/Img" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textViewLocalAdress"

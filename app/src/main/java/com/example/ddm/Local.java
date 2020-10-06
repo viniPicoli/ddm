@@ -25,12 +25,13 @@ public class Local {
     String cep;
     String latitude;
     String longitude;
+    String path;
 
     private SQLiteDatabase db;
     public Local(){
     }
 
-    public Local(int _id,int _personid,int _avaliacaopos, int _avaliacaoneg, String _descricao, String _titulo, String _cidade, String _rua, String _uf, String _bairro,String _numero, String _complemento, String _cep, String _latitude, String _longitude){
+    public Local(int _id,int _personid,int _avaliacaopos, int _avaliacaoneg, String _descricao, String _titulo, String _cidade, String _rua, String _uf, String _bairro,String _numero, String _complemento, String _cep, String _latitude, String _longitude, String _path){
     this.id = _id;
     this.personid = _personid;
     this.avaliacaopos = _avaliacaopos;
@@ -46,23 +47,15 @@ public class Local {
     this.cep = _cep;
     this.latitude = _latitude;
     this.longitude = _longitude;
+    this.path = _path;
     }
 
-    public Local(int _personid,int _avaliacaopos, int _avaliacaoneg, String _descricao, String _titulo, String _cidade, String _rua, String _uf, String _bairro,String _numero, String _complemento, String _cep, String _latitude, String _longitude){
-        this.personid = _personid;
-        this.avaliacaopos = _avaliacaopos;
-        this.avaliacaoneg = _avaliacaoneg;
-        this.descricao = _descricao;
-        this.titulo = _titulo;
-        this.cidade = _cidade;
-        this.rua = _rua;
-        this.uf = _uf;
-        this.bairro = _bairro;
-        this.numero = _numero;
-        this.complemento = _complemento;
-        this.cep = _cep;
-        this.latitude = _latitude;
-        this.longitude = _longitude;
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public int getId() {

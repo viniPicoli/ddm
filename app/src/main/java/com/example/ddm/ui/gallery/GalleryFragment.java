@@ -1,19 +1,27 @@
 package com.example.ddm.ui.gallery;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.Manifest;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,10 +37,16 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class GalleryFragment extends Fragment {
 
     private FragmentManager fragmentManager;
     private GalleryViewModel galleryViewModel;
+    private String localPath;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel = ViewModelProviders.of(this).get(GalleryViewModel.class);
@@ -56,11 +70,12 @@ public class GalleryFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         localUF.setAdapter(adapter);
 
-        Button btnAddImg = getActivity().findViewById(R.id.imageButtonLocalAddImg);
+        ImageButton btnAddImg = getActivity().findViewById(R.id.imageButtonLocalAddImg);
         btnAddImg.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick (View v) {
-                //saveImg();
+                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, 123);
             }
         });
 
@@ -72,6 +87,7 @@ public class GalleryFragment extends Fragment {
                 if(validateInputs()){
                     saveData();
                     Toast.makeText(getContext(), "Salvo com sucesso!", Toast.LENGTH_SHORT);
+                    getActivity().onBackPressed();
                 }
             }
         });
@@ -80,8 +96,7 @@ public class GalleryFragment extends Fragment {
         btnBack.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick (View v) {
-
-                Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
+                getActivity().onBackPressed();
             }
         });
 
@@ -175,6 +190,8 @@ public class GalleryFragment extends Fragment {
         return true;
     }
 
+
+
     private void saveData(){
         try {
 
@@ -210,6 +227,7 @@ public class GalleryFragment extends Fragment {
             local.setUf(localUF.getSelectedItem().toString());
             local.setLatitude(localLatitude.getText().toString());
             local.setLongitude(localLongitude.getText().toString());
+            //local.setPath(getImg());
 
             db.addLocal(local);
             Toast.makeText(getContext(), "Salvo com Sucesso!", Toast.LENGTH_SHORT).show();
@@ -219,18 +237,51 @@ public class GalleryFragment extends Fragment {
 
     }
 
-    private void saveImg(){
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(Intent.createChooser(intent, "Selecione uma imagem"), 123);
-    }
-//    private void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if(resultCode == Activity.RESULT_OK){
-//            if(requestCode == 123){
-//                Uri imagemSelecionada = data.getData();
-//
-//            }
-//        }
-//    }
+    private String SaveImg() throws IOException {
+        File dir = getContext().getDir("ImagePath", Context.MODE_PRIVATE);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getActivity().getExternalFilesDir(String.valueOf(dir));
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
 
+        // Save a file: path for use with ACTION_VIEW intents
+        String currentPhotoPath = image.getAbsolutePath();
+
+        return currentPhotoPath;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 123 && resultCode == getActivity().RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getActivity().getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+
+            File dir = getContext().getDir("ImagePath", Context.MODE_PRIVATE);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
+            String imageFileName = "IMG_" + timeStamp + "_";
+            File storageDir = getActivity().getExternalFilesDir(String.valueOf(dir));
+            try {
+                File image = File.createTempFile(cursor.getString(columnIndex), ".jpg", storageDir);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            this.localPath = cursor.getString(columnIndex);
+            cursor.close();
+            ImageView imageViewLocal = (ImageView) getActivity().findViewById(R.id.imageViewLocal);
+            imageViewLocal.setImageBitmap(BitmapFactory.decodeFile(localPath));
+
+        }
+    }
 
 }
