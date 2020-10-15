@@ -11,12 +11,13 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/img"
         android:theme="@style/AppTheme.AppBarOverlay">
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
+            android:layout_width="407dp"
             android:layout_height="731dp"
             android:layout_margin="2dp" />
 
