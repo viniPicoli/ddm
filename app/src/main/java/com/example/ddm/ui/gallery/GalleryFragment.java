@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -41,7 +42,13 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -49,8 +56,9 @@ public class GalleryFragment extends Fragment {
 
     private FragmentManager fragmentManager;
     private GalleryViewModel galleryViewModel;
-    private String localPath;
-    private Uri uri;
+    private String selectedImagePath = "";
+    final private int PICK_IMAGE = 1;
+    private String imgPath;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel = ViewModelProviders.of(this).get(GalleryViewModel.class);
@@ -79,16 +87,10 @@ public class GalleryFragment extends Fragment {
             @Override
             public void onClick (View v) {
 
-                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-                try {
-                    uri = saveImg();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                i.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-
-                startActivityForResult(i, 123);
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_PICK);
+                startActivityForResult(Intent.createChooser(intent, ""), PICK_IMAGE);
             }
         });
 
@@ -98,9 +100,24 @@ public class GalleryFragment extends Fragment {
             public void onClick (View v) {
 
                 if(validateInputs()){
-                    saveData();
-                    Toast.makeText(getContext(), "Salvo com sucesso!", Toast.LENGTH_SHORT);
-                    getActivity().onBackPressed();
+                    if(saveData()){
+                        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date()) + ".png";
+                        File folder = new File(Environment.getExternalStorageDirectory() + File.separator + "PescaFacilImgs");
+                        if (!folder.exists()) {
+                            folder.mkdirs();
+                        }
+                        File pic = new File(folder, timeStamp);
+                        imgPath = pic.getAbsolutePath();
+                        File file = new File(selectedImagePath);
+                        Log.println(Log.ERROR, "e", pic.getAbsolutePath());
+                        try {
+                            copy(file, pic);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(getContext(), "Salvo com sucesso!", Toast.LENGTH_SHORT);
+                        getActivity().onBackPressed();
+                    }
                 }
             }
         });
@@ -205,7 +222,7 @@ public class GalleryFragment extends Fragment {
 
 
 
-    private void saveData(){
+    private boolean saveData(){
         try {
 
             EditText localNome = getActivity().findViewById(R.id.editTextLocalNome);
@@ -227,8 +244,6 @@ public class GalleryFragment extends Fragment {
             long idPerson = sharedPref.getLong("IdPerson", 1);
 
             local.setPersonid(Integer.parseInt(Long.toString(idPerson)));
-            //local.setAvaliacaoneg(0);
-            //local.setAvaliacaopos(0);
             local.setTitulo(localNome.getText().toString());
             local.setDescricao(localDescricao.getText().toString());
             local.setCep(localCep.getText().toString());
@@ -240,41 +255,83 @@ public class GalleryFragment extends Fragment {
             local.setUf(localUF.getSelectedItem().toString());
             local.setLatitude(localLatitude.getText().toString());
             local.setLongitude(localLongitude.getText().toString());
-            local.setPath(localPath);
+            local.setPath(imgPath);
 
             db.addLocal(local);
-            Toast.makeText(getContext(), "Salvo com Sucesso!", Toast.LENGTH_SHORT).show();
+            return true;
         } catch (Exception e){
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            return false;
         }
 
     }
 
-    private Uri saveImg() throws IOException {
-        File dir = getContext().getDir("ImagePath", Context.MODE_PRIVATE);
-        if (!dir.exists()) {
-            dir.mkdirs();
+
+    public Bitmap decodeFile(String path) {
+        try {
+            // Decode image size
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(path, o);
+            // The new size we want to scale to
+            final int REQUIRED_SIZE = 70;
+
+            // Find the correct scale value. It should be the power of 2.
+            int scale = 1;
+            while (o.outWidth / scale / 2 >= REQUIRED_SIZE && o.outHeight / scale / 2 >= REQUIRED_SIZE)
+                scale *= 2;
+
+            // Decode with inSampleSize
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize = scale;
+            return BitmapFactory.decodeFile(path, o2);
+        } catch (Throwable e) {
+            e.printStackTrace();
         }
-        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
-        String imageFileName = "IMG_" + timeStamp + ".jpg";
-        File image = new File(dir.getPath() + "/" + imageFileName);
+        return null;
 
-        localPath = image.getAbsolutePath();
-        Log.println(Log.ERROR, "eror", dir.getPath());
+    }
 
-        return Uri.fromFile(image);
+    public String getAbsolutePath(Uri uri) {
+        String[] projection = { MediaStore.MediaColumns.DATA };
+        @SuppressWarnings("deprecation")
+        Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } else
+            return null;
+    }
+
+    public void copy(File src, File dst) throws IOException {
+        InputStream in = new FileInputStream(src);
+        try {
+            OutputStream out = new FileOutputStream(dst);
+            try {
+                // Transfer bytes from in to out
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+            } finally {
+                out.close();
+            }
+        } finally {
+            in.close();
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 123 && resultCode == getActivity().RESULT_OK) {
-
-            Intent ni = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
-            getActivity().sendBroadcast(ni);
-
-            ImageView imageViewLocal = (ImageView) getActivity().findViewById(R.id.imageViewLocal);
-            imageViewLocal.setImageBitmap(BitmapFactory.decodeFile(localPath));
-
+        if (resultCode != Activity.RESULT_CANCELED) {
+            if (requestCode == PICK_IMAGE) {
+                ImageView imageViewLocal = getActivity().findViewById(R.id.imageViewLocal);
+                selectedImagePath = getAbsolutePath(data.getData());
+                imageViewLocal.setImageBitmap(decodeFile(selectedImagePath));
+            } else {
+                super.onActivityResult(requestCode, resultCode, data);
+            }
         }
     }
 
