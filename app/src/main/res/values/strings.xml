@@ -23,10 +23,12 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Adicionar</string>
     <string name="menu_slideshow">Perfil</string>
+    <string name="menu_myLocals">Meus Locais</string>
 
 
     <!--Strings Add Local - Willian Riviera-->
     <string name="localDescricao">Descrição</string>
+    <string name="localPhoto">Adicionar Foto</string>
     <string name="localRua">Rua</string>
     <string name="localUf">UF</string>
     <string name="localBairro">Bairro</string>

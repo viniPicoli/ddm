@@ -27,4 +27,9 @@
         android:name="com.example.ddm.ui.newRegister.InitalFragment"
         android:label="register_fragment"
         tools:layout="@layout/fragment_inital" />
+    <fragment
+        android:id="@+id/nav_myLocals"
+        android:name="com.example.ddm.ui.myLocals.MyLocalsFragment"
+        android:label="Meus Locais"
+        tools:layout="@layout/my_locals_fragment" />
 </navigation>

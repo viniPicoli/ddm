@@ -15,7 +15,7 @@ import java.util.List;
 public class DataBase extends SQLiteOpenHelper {
 
     //Variaveis do banco
-    private static final int VERSAO_BANCO = 4;
+    private static final int VERSAO_BANCO = 5;
     private static final String BANCO_NOME = "db_SqL";
 
     //Variaveis table Person
@@ -88,8 +88,8 @@ public class DataBase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("ALTER TABLE " + TABELA_USER + " ADD COLUMN " + PERSON_USER_ID + " INTEGER");
-        db.execSQL("ALTER TABLE " + TABELA_PERSON + " ADD COLUMN " + PATH + " TEXT");
+       // db.execSQL("ALTER TABLE " + TABELA_USER + " ADD COLUMN " + PERSON_USER_ID + " INTEGER");
+       // db.execSQL("ALTER TABLE " + TABELA_PERSON + " ADD COLUMN " + PATH + " TEXT");
     }
 
     // crud add
@@ -257,6 +257,42 @@ public class DataBase extends SQLiteOpenHelper {
     public List<Local> selecttodoslocais(){
         ArrayList<Local> listaLocal = new ArrayList<Local>();
         String query = "Select * from " + TABELA_LOCAL;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query,null);
+
+
+
+        if(cursor.moveToFirst()){
+            do{
+                Local local = new Local();
+//                local.setId(Integer.parseInt(cursor.getString(0)));
+//                local.setPersonid(Integer.parseInt(cursor.getString(1)));
+//                local.setAvaliacaopos(Integer.parseInt(cursor.getString(2)));
+//                local.setAvaliacaoneg(Integer.parseInt(cursor.getString(3)));
+                local.setDescricao(cursor.getString(4));
+                local.setTitulo(cursor.getString(5));
+//                local.setCidade(cursor.getString(6));
+//                local.setRua(cursor.getString(7));
+//                local.setUf(cursor.getString(8));
+//                local.setBairro(cursor.getString(9));
+//                local.setNumero(cursor.getString(10));
+//                local.setComplemento(cursor.getString(11));
+//                local.setCep(cursor.getString(12));
+//                local.setLatitude(cursor.getString(13));
+//                local.setLongitude(cursor.getString(14));
+
+                listaLocal.add(local);
+            }while(cursor.moveToNext());
+        }
+
+        return listaLocal;
+    }
+
+    public List<Local> selectAllLocalsPerson(int id){
+        ArrayList<Local> listaLocal = new ArrayList<Local>();
+        String query = "Select * from " + TABELA_LOCAL + " WHERE " + LOCAL_PERSONID + " = " + id;
 
         SQLiteDatabase db = this.getWritableDatabase();
 

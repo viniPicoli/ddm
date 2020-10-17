@@ -79,22 +79,23 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@+id/imageButtonLocalAddImg"
-                        android:layout_width="190dp"
+                    <Button
+                        android:id="@+id/buttonAddLocalImage"
+                        android:layout_width="372dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:contentDescription="@string/localAddImg"
-                        android:src="@drawable/ic_menu_camera" />
+                        android:layout_weight="1"
+                        android:drawableStart="@drawable/ic_menu_camera"
+                        android:text="@string/localPhoto" />
 
                     <ImageView
                         android:id="@+id/imageViewLocal"
                         android:layout_width="190dp"
-                        android:layout_height="43dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
                         android:layout_weight="1"
+                        android:clickable="false"
                         android:contentDescription="@string/Img" />
 
                 </LinearLayout>

@@ -13,6 +13,10 @@
             android:icon="@drawable/edit"
             android:title="@string/menu_gallery" />
         <item
+            android:id="@+id/nav_myLocals"
+            android:icon="@android:drawable/ic_dialog_map"
+            android:title="@string/menu_myLocals" />
+        <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/avatar"
             android:title="@string/menu_slideshow" />
