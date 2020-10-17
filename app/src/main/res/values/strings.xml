@@ -24,6 +24,8 @@
     <string name="menu_gallery">Adicionar</string>
     <string name="menu_slideshow">Perfil</string>
     <string name="menu_myLocals">Meus Locais</string>
+    <string name="myPerfil">Meu Perfil</string>
+    <string name="UserEdit">Editar</string>
 
 
     <!--Strings Add Local - Willian Riviera-->

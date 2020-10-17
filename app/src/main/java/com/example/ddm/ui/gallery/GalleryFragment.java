@@ -109,7 +109,7 @@ public class GalleryFragment extends Fragment {
                         File pic = new File(folder, timeStamp);
                         imgPath = pic.getAbsolutePath();
                         File file = new File(selectedImagePath);
-                        Log.println(Log.ERROR, "e", pic.getAbsolutePath());
+                        //Log.println(Log.ERROR, "e", pic.getAbsolutePath());
                         try {
                             copy(file, pic);
                         } catch (IOException e) {

@@ -204,7 +204,7 @@ public class DataBase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABELA_USER, new String[]{USER_ID, USER_LOGIN, USER_SENHA},
-                USER_ID + " = ?", new String[]{String.valueOf(id)},
+                PERSON_USER_ID + " = ?", new String[]{String.valueOf(id)},
                 null, null, null, null);
 
         if (cursor != null) {
@@ -350,7 +350,7 @@ public class DataBase extends SQLiteOpenHelper {
         values_user.put(USER_LOGIN, user.getLogin());
         values_user.put(USER_SENHA, user.getSenha());
 
-        db.update(TABELA_USER,values_user,USER_ID + " = ?",
+        db.update(TABELA_USER,values_user,PERSON_USER_ID + " = ?",
                 new String[] { String.valueOf(user.getId())});
     }
 
