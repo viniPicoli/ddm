@@ -47,6 +47,7 @@ public class SlideshowFragment extends Fragment {
 
                 if(btnEditPerson.getText().toString().equals("Editar")){
                     btnEditPerson.setText("Salvar");
+                    btnEditPerson.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_save_file_option, 0, 0, 0);
                     getActivity().findViewById(R.id.editTextPersonFirstName).setFocusableInTouchMode(true);
                     getActivity().findViewById(R.id.editTextPersonSecondName).setFocusableInTouchMode(true);
                     getActivity().findViewById(R.id.editTextPersonPhone).setFocusableInTouchMode(true);
@@ -56,6 +57,7 @@ public class SlideshowFragment extends Fragment {
                     if(validateInputs()) {
                         if (saveData()) {
                             btnEditPerson.setText("Editar");
+                            btnEditPerson.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_edit, 0, 0, 0);
                             Toast.makeText(getContext(), "Alterado com Sucesso!", Toast.LENGTH_SHORT).show();
                             getActivity().findViewById(R.id.editTextPersonFirstName).setFocusable(false);
                             getActivity().findViewById(R.id.editTextPersonSecondName).setFocusable(false);

@@ -15,7 +15,7 @@ import java.util.List;
 public class DataBase extends SQLiteOpenHelper {
 
     //Variaveis do banco
-    private static final int VERSAO_BANCO = 6;
+    private static final int VERSAO_BANCO = 7;
     private static final String BANCO_NOME = "db_SqL";
 
     //Variaveis table Person
@@ -69,8 +69,8 @@ public class DataBase extends SQLiteOpenHelper {
 
         String QUERY_USER = "CREATE TABLE " + TABELA_USER + " ("
                 + USER_ID + " INTEGER PRIMARY KEY, " + USER_LOGIN + " TEXT, "
-                + USER_SENHA + " TEXT)";
-               // + PERSON_USER_ID + " INTEGER)";
+                + USER_SENHA + " TEXT, "
+                + PERSON_USER_ID + " INTEGER)";
 
         db.execSQL(QUERY_USER);
 
@@ -81,15 +81,17 @@ public class DataBase extends SQLiteOpenHelper {
                 + LOCAL_CIDADE + " TEXT, " + LOCAL_RUA + " TEXT, "
                 + LOCAL_UF + " TEXT, " + LOCAL_BAIRRO + " TEXT, " + LOCAL_NUMERO + " TEXT, "
                 + LOCAL_COMPLEMENTO + " TEXT, " + LOCAL_CEP + " TEXT, "
-                + LOCAL_LATITUDE + " TEXT, " + LOCAL_LONGITUDE + " TEXT)";
-               // + PATH + " TEXT)";
+                + LOCAL_LATITUDE + " TEXT, " + LOCAL_LONGITUDE + " TEXT, "
+                + PATH + " TEXT)";
         db.execSQL(QUERY_LOCAL);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-       db.execSQL("ALTER TABLE " + TABELA_USER + " ADD COLUMN " + PERSON_USER_ID + " INTEGER");
-       db.execSQL("ALTER TABLE " + TABELA_PERSON + " ADD COLUMN " + PATH + " TEXT");
+        if(newVersion < 7){
+            db.execSQL("ALTER TABLE " + TABELA_USER + " ADD COLUMN " + PERSON_USER_ID + " INTEGER");
+            db.execSQL("ALTER TABLE " + TABELA_PERSON + " ADD COLUMN " + PATH + " TEXT");
+        }
     }
 
     // crud add

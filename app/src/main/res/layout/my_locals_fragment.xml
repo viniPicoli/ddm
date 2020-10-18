@@ -28,9 +28,10 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="20dp"
-            android:background="#FFFFFF"
-            android:drawableStart="@android:drawable/ic_input_add"
-            android:padding="10dp"
+            android:background="@drawable/button_shape"
+            android:drawableStart="@drawable/ic_plus_symbol_button"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
             android:text="@string/menu_gallery" />
 
         <FrameLayout
@@ -44,7 +45,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RecyclerViewerMyLocals"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@drawable/imageview_border" />
         </FrameLayout>
     </LinearLayout>
 </FrameLayout>

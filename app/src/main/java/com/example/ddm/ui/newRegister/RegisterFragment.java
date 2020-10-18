@@ -102,7 +102,7 @@ public class RegisterFragment extends Fragment {
             EditText registerPhone = getActivity().findViewById(R.id.phoneRegister);
             EditText registerEmail = getActivity().findViewById(R.id.emailRegister);
             EditText registerPassword = getActivity().findViewById(R.id.passwordRegister);
-            long idUser, idPerson;
+            long idPerson;
 
             User user = new User();
             Person person = new Person();
