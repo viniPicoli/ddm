@@ -92,7 +92,7 @@
                         android:focusable="false"
                         android:hint="@string/registerPhone"
                         android:importantForAutofill="no"
-                        android:inputType="phone" />
+                        android:inputType="textPersonName|phone" />
 
                     <EditText
                         android:id="@+id/editTextPersonMail"
