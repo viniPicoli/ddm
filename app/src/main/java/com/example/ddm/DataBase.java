@@ -264,26 +264,11 @@ public class DataBase extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query,null);
 
-
-
         if(cursor.moveToFirst()){
             do{
                 Local local = new Local();
-//                local.setId(Integer.parseInt(cursor.getString(0)));
-//                local.setPersonid(Integer.parseInt(cursor.getString(1)));
-//                local.setAvaliacaopos(Integer.parseInt(cursor.getString(2)));
-//                local.setAvaliacaoneg(Integer.parseInt(cursor.getString(3)));
                 local.setDescricao(cursor.getString(4));
                 local.setTitulo(cursor.getString(5));
-//                local.setCidade(cursor.getString(6));
-//                local.setRua(cursor.getString(7));
-//                local.setUf(cursor.getString(8));
-//                local.setBairro(cursor.getString(9));
-//                local.setNumero(cursor.getString(10));
-//                local.setComplemento(cursor.getString(11));
-//                local.setCep(cursor.getString(12));
-//                local.setLatitude(cursor.getString(13));
-//                local.setLongitude(cursor.getString(14));
 
                 listaLocal.add(local);
             }while(cursor.moveToNext());

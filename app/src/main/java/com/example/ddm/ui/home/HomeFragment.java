@@ -37,14 +37,6 @@ public class HomeFragment extends Fragment {
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-//        final TextView textView = root.findViewById(R.id.text_home);
-//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
-
 
         return root;
     };
@@ -61,18 +53,6 @@ public class HomeFragment extends Fragment {
         Local local = new Local();
         DataBase db = new DataBase(getContext());
         listLocal = db.selecttodoslocais();
-
-//        Local[] locals = new Local[]{
-//                new Local(1,1,1,1, "açude com pintado, pirara, aaaa aaa aaaaaaa","Pesca esportiva","test","test","test","test","test","test","test","test","test"),
-//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
-//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
-//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
-//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
-//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
-//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
-//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test"),
-//                new Local(1,1,1,1,"test","test","test","test","test","test","test","test","test","test","test")
-//        };
 
         ViewLocal viewLocal = new ViewLocal(this.getContext(), listLocal);
         recyclerView.setAdapter(viewLocal);
